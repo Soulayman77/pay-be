@@ -54,7 +54,7 @@ public class EleveController {
         });
     }
 
-    @DeleteMapping("/eleveId")
+    @DeleteMapping("/{eleveId}")
     public void deleteEleve(@PathVariable Long eleveId){
         eleveRepository.deleteById(eleveId);
     }
