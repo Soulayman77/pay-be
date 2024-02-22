@@ -19,13 +19,13 @@ public class Paiement {
     private LocalDate dateTransaction;
     @Column(nullable = false)
     private double montant;
-    public Paiement(Eleve eleve){
-        this.eleve = eleve;
-    }
+//    public Paiement(Eleve eleve){
+//        this.eleve = eleve;
+//    }
 
     @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name = "eleveId", nullable = false)
+//    @JoinColumn(name = "eleveId", nullable = false)
     private Eleve eleve;
 
     @ManyToOne
