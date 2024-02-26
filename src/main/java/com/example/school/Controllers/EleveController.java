@@ -47,6 +47,7 @@ public class EleveController {
     @DeleteMapping("/{id}")
     public void deleteEleve(@PathVariable Long id){
         eleveService.deleteStudentById(id);
+
     }
 
 

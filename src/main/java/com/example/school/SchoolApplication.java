@@ -82,9 +82,9 @@ public class SchoolApplication {
             eleveService.addEleve(eleve);
 
 
-            Paiement paiement = new Paiement(eleve);
+            Paiement paiement = new Paiement();
             paiement.setMontant(23.3);
-            Paiement paiement2 = new Paiement(eleve2);
+            Paiement paiement2 = new Paiement();
             paiement.setMontant(23458.3);
             paiementRepository.save(paiement);
             paiementRepository.save(paiement2);
@@ -139,27 +139,28 @@ public class SchoolApplication {
 //                System.out.println(p);
 //
 //            });
-//            etatServiceRepository.findAll().forEach(p->{
-//                System.out.println(p);
-//            });
+            etatServiceRepository.findAll().forEach(p->{
+                System.out.println(p);
+            });
+
+
+            remiseRepository.findAll().forEach(p->{
+                System.out.println(p);
+            });
+            factureRepository.findAll().forEach(p->{
+                System.out.println(p);
+            });
+
+            serviceRepository.findAll().forEach(p->{
+                System.out.println(p);
+            });
+
+
+            paiementRepository.findAll().forEach(p->{
+                System.out.println(p);
+            });
 //
-//
-//            remiseRepository.findAll().forEach(p->{
-//                System.out.println(p);
-//            });
-//            factureRepository.findAll().forEach(p->{
-//                System.out.println(p);
-//            });
-//
-//            serviceRepository.findAll().forEach(p->{
-//                System.out.println(p);
-//            });
-//
-//
-//            paiementRepository.findAll().forEach(p->{
-//                System.out.println(p);
-//            });
-//
+
 //            eleveRepository.findAll().forEach(p->{
 //                System.out.println(p);
 //            });
@@ -167,6 +168,7 @@ public class SchoolApplication {
 //                System.out.println(p);
 //            });
 //
+
         };
    }
 //

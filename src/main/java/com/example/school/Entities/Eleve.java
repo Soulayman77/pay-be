@@ -51,6 +51,7 @@ public class Eleve {
 //    List<Service> services=new ArrayList<>();
 
     @OneToMany(mappedBy = "eleve",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
     private List<EtatService> etatServices = new ArrayList<>();
 
 
