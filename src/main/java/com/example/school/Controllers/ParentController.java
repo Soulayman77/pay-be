@@ -20,42 +20,32 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/parent")
 public class ParentController {
-    @Autowired
-    private ParentRepository parentRepository;
+
     @Autowired
     private ParentService parentService;
     @GetMapping("/all")
     public List<Parent> getParents(){
-        return parentRepository.findAll();
+
+        return parentService.getAllParent();
     }
 
     @GetMapping("/{parentId}")
     public Parent getParentById(@PathVariable String parentId){
-        return parentRepository.findById(parentId).get();
+        return parentService.getParentById(parentId);
     }
 
     @PostMapping("/add")
     public Parent addParent(@RequestBody Parent parent){
-        return parentRepository.save(parent);
+        return parentService.saveParent(parent);
     }
 
     @PutMapping("/parentId")
     public void updateParent(@RequestBody Parent parent, @PathVariable String parentId){
-        parentRepository.findById(parentId).map(parent1 -> {
-            parent1.setCIN(parent.getCIN());
-            parent1.setLastName(parent.getLastName());
-            parent1.setFirstName(parent.getFirstName());
-            parent1.setAddress(parent.getAddress());
-            parent1.setEmail(parent.getEmail());
-            parent1.setDateInscription(parent.getDateInscription());
-            parent1.setImage(parent.getImage());
-
-            return parentRepository.save(parent1);
-        });
+          parentService.updateParent(parent,parentId);
     }
 
-    @DeleteMapping("/parentId")
-    public void deleteParent(@PathVariable String parentId){
-        parentRepository.deleteById(parentId);
+    @DeleteMapping("/{id}")
+    public void deleteParent(@PathVariable String id){
+        parentService.deleteParentById(id);
     }
 }

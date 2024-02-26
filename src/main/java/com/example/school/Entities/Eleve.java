@@ -42,7 +42,7 @@ public class Eleve {
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Parent parent;
 
-    @OneToMany(mappedBy = "eleve",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "eleve",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<Paiement> paiements=new ArrayList<>();
 
