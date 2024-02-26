@@ -22,7 +22,7 @@ import java.util.Locale;
 public class Eleve {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEleve;
+    private Long id;
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
@@ -42,7 +42,7 @@ public class Eleve {
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Parent parent;
 
-    @OneToMany(mappedBy = "eleve",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "eleve",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<Paiement> paiements=new ArrayList<>();
 
@@ -50,8 +50,7 @@ public class Eleve {
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 //    List<Service> services=new ArrayList<>();
 
-    @OneToMany(mappedBy = "eleve",fetch = FetchType.EAGER)
-
+    @OneToMany(mappedBy = "eleve",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<EtatService> etatServices = new ArrayList<>();
 
 

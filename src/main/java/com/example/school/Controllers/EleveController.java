@@ -21,42 +21,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/student")
 public class EleveController {
-
-    @Autowired
-    private EleveRepository eleveRepository;
     @Autowired
     private EleveService eleveService;
 
     @GetMapping("/all")
     public List<Eleve> getEleves(){
-        return eleveRepository.findAll();
+        return eleveService.getAllStudents();
     }
 
     @GetMapping("/{eleveId}")
-    public Optional<Eleve> getEleveById(@PathVariable Long eleveId){
-        return eleveRepository.findById(eleveId);
+    public Eleve getEleveById(@PathVariable Long eleveId){
+        return eleveService.getStudentById(eleveId);
     }
 
     @PostMapping("/add")
     public Eleve addEleve(@RequestBody Eleve eleve){
-
-
         return eleveService.addEleve(eleve);
     }
 
     @PutMapping("/eleveId")
     public void updateEleve(@RequestBody Eleve eleve, @PathVariable Long eleveId){
-        eleveRepository.findById(eleveId).map(eleve1 -> {
-            eleve1.setFirstName(eleve.getFirstName());
-            eleve1.setLastName(eleve.getLastName());
-//            eleve1.setDateNaissance(eleve.getDateNaissance());
-            return eleveRepository.save(eleve1);
-        });
+        eleveService.updateEleve(eleve,eleveId);
     }
 
-    @DeleteMapping("/eleveId")
-    public void deleteEleve(@PathVariable Long eleveId){
-        eleveRepository.deleteById(eleveId);
+    @DeleteMapping("/{id}")
+    public void deleteEleve(@PathVariable Long id){
+        eleveService.deleteStudentById(id);
     }
 
 

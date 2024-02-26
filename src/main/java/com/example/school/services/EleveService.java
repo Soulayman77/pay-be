@@ -48,8 +48,28 @@ public class EleveService {
 //        return eleve;
 //    }
 
+    public List<Eleve> getAllStudents() {
+        return eleveRepository.findAll();
+    }
+
+    public Eleve getStudentById(Long id) {
+        return eleveRepository.findById(id).get();
+    }
     public List<Eleve> getElevesByParentId(String id) {
         return eleveRepository.findElevesByParentCIN(id);
+    }
+
+    public void updateEleve(Eleve eleve, Long id ) {
+        eleveRepository.findById(id).map(eleve1 -> {
+            eleve1.setFirstName(eleve.getFirstName());
+            eleve1.setLastName(eleve.getLastName());
+//            eleve1.setDateNaissance(eleve.getDateNaissance());
+            return eleveRepository.save(eleve1);
+        });
+    }
+
+    public void deleteStudentById(Long id) {
+        eleveRepository.deleteById(id);
     }
 
 }

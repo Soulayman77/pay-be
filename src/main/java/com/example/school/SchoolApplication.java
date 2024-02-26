@@ -3,6 +3,7 @@ package com.example.school;
 import com.example.school.Entities.*;
 import com.example.school.Repositories.*;
 import com.example.school.services.EleveService;
+import com.example.school.services.ParentService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +24,7 @@ public class SchoolApplication {
 
    @Bean
     CommandLineRunner coucou(
-           ParentRepository parentRepository,
+
            EleveRepository eleveRepository,
            PaiementRepository paiementRepository,
            ServiceRepository serviceRepository,
@@ -31,7 +32,8 @@ public class SchoolApplication {
            RemiseRepository remiseRepository,
            CategorieServiceRepository categorieServiceRepository,
            EtatServiceRepository etatServiceRepository,
-           EleveService eleveService
+           EleveService eleveService,
+           ParentService parentService
 
    ){
         return args -> {
@@ -43,8 +45,8 @@ public class SchoolApplication {
             parent2.setFirstName("Ziyad");
             parent.setLastName("KHOKI");
             parent2.setLastName("KHAWAKHI");
-            parentRepository.save(parent);
-            parentRepository.save(parent2);
+            parentService.saveParent(parent);
+            parentService.saveParent(parent2);
 //
             CategorieService categorieService = new CategorieService();
             CategorieService categorieService2 = new CategorieService();
@@ -121,7 +123,16 @@ public class SchoolApplication {
 
 
 
-            System.out.println(eleveService.getElevesByParentId("PA238948"));
+//            System.out.println(eleveService.getElevesByParentId("PA238948"));
+//            System.out.println("$$$$$$$$");
+//            parentRepository.findAll().forEach(p->{
+//                System.out.println(p);
+//            });
+//            System.out.println("After");
+//            parentService.deleteParentById("PA238948");
+//            parentRepository.findAll().forEach(p->{
+//                System.out.println(p);
+//            });
 
 
 //            etatServiceRepository.findEtatServicesByPayer(false).forEach(p->{
@@ -149,9 +160,9 @@ public class SchoolApplication {
 //                System.out.println(p);
 //            });
 //
-            eleveRepository.findAll().forEach(p->{
-                System.out.println(p);
-            });
+//            eleveRepository.findAll().forEach(p->{
+//                System.out.println(p);
+//            });
 // parentRepository.findAll().forEach(p->{
 //                System.out.println(p);
 //            });
