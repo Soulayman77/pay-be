@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +18,14 @@ import java.util.List;
 @NoArgsConstructor
 public class Parent {
     @Id
-    private Long cinParent;
+    private String cinParent;
     private String nom;
     private String prenom;
     private String email;
     private String phoneNumber;
     private String adress;
+    private LocalDate dateNaissance;
+    private String photo;
 
     @OneToMany(mappedBy = "parent")
     List<Eleve> eleves =new ArrayList<>();

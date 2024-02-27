@@ -37,6 +37,8 @@ public class EleveController {
             eleve1.setNom(eleve.getNom());
             eleve1.setPrenom(eleve.getPrenom());
             eleve1.setDateNaissance(eleve.getDateNaissance());
+            eleve1.setNiveau(eleve.getNiveau());
+            eleve1.setAdresse(eleve.getAdresse());
             return eleveRepository.save(eleve1);
         });
     }

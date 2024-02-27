@@ -20,9 +20,11 @@ public class Eleve {
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;
+    private String niveau;
+    private String adresse;
 
     @ManyToOne
-    @JoinColumn(name = "parentCIN",nullable = false)
+    @JoinColumn(name = "parentCIN")
     private Parent parent;
 
     @OneToMany(mappedBy = "eleve",fetch = FetchType.EAGER)
