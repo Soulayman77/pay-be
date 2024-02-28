@@ -37,89 +37,89 @@ public class SchoolApplication {
 
    ){
         return args -> {
-            Parent parent = new Parent();
-            Parent parent2 = new Parent();
-            parent.setCIN("PA238948");
-            parent2.setCIN("PA238949");
-            parent.setFirstName("TTo");
-            parent2.setFirstName("Ziyad");
-            parent.setLastName("KHOKI");
-            parent2.setLastName("KHAWAKHI");
-            parentService.saveParent(parent);
-            parentService.saveParent(parent2);
+//            Parent parent = new Parent();
+//            Parent parent2 = new Parent();
+//            parent.setCIN("PA238948");
+//            parent2.setCIN("PA238949");
+//            parent.setFirstName("TTo");
+//            parent2.setFirstName("Ziyad");
+//            parent.setLastName("KHOKI");
+//            parent2.setLastName("KHAWAKHI");
+//            parentService.saveParent(parent);
+//            parentService.saveParent(parent2);
+////
+//            CategorieService categorieService = new CategorieService();
+//            CategorieService categorieService2 = new CategorieService();
+//            categorieService.setNomCategorie("Ext");
+//            categorieServiceRepository.save(categorieService);
+//            categorieServiceRepository.save(categorieService2);
 //
-            CategorieService categorieService = new CategorieService();
-            CategorieService categorieService2 = new CategorieService();
-            categorieService.setNomCategorie("Ext");
-            categorieServiceRepository.save(categorieService);
-            categorieServiceRepository.save(categorieService2);
-
-
-            Service natation = new Service();
-            natation.setPrice(23);
-            natation.setName("natation");
-            natation.setType(ServiceType.OBLICATORY);
-            System.out.println(natation.getType());
-            serviceRepository.save(natation);
 //
-
-            Eleve eleve = new Eleve();
-            eleve.setFirstName("Tati");
-            eleve.setLastName("TATITO");
-            eleve.setParent(parent);
-
+//            Service natation = new Service();
+//            natation.setPrice(23);
+//            natation.setName("natation");
+//            natation.setType(ServiceType.OBLIGATORY);
+//            System.out.println(natation.getType());
+//            serviceRepository.save(natation);
+////
 //
-            Eleve eleve2 = new Eleve();
-            Eleve eleve3 = new Eleve();
-            eleve2.setFirstName("TADFj");
-            eleve2.setLastName("KIKI");
-            eleve2.setParent(parent);
-            eleve3.setLastName("AIT AHMID");
-            eleve3.setFirstName("Tarik");
-            eleve3.setParent(parent2);
-            eleveService.addEleve(eleve3);
-            eleveService.addEleve(eleve2);
-            eleveService.addEleve(eleve);
-
-
-            Paiement paiement = new Paiement();
-            paiement.setMontant(23.3);
-            Paiement paiement2 = new Paiement();
-            paiement.setMontant(23458.3);
-            paiementRepository.save(paiement);
-            paiementRepository.save(paiement2);
+//            Eleve eleve = new Eleve();
+//            eleve.setFirstName("Tati");
+//            eleve.setLastName("TATITO");
+//            eleve.setParent(parent);
 //
-
-
-            Facture facture = new Facture();
-            facture.setMontant(232);
-            factureRepository.save(facture);
-            paiement.setFacture(facture);
-            paiement2.setFacture(facture);
-            paiementRepository.save(paiement);
-            paiementRepository.save(paiement2);
-
-            Remise discount = new Remise();
-            discount.setPercentage(4.2);
-            discount.setNameDiscount("Lilah");
-            Remise discount2 = new Remise();
-            discount2.setNameDiscount("Aid Adha");
-            discount2.setConditionn("Homme endicap");
-            discount2.setPercentage(5.2);
-            remiseRepository.save(discount);
-            remiseRepository.save(discount2);
-            serviceRepository.save(natation);
-
-            EtatService etatService = new EtatService();
-            EtatService etatService2 = new EtatService();
-            etatService.setService(natation);
-            etatService.setEleve(eleve2);
-            etatService.setPayer(false);
-
-            etatService2.setService(natation);
-            etatService2.setEleve(eleve2);
-            etatServiceRepository.save(etatService);
-            etatServiceRepository.save(etatService2);
+////
+//            Eleve eleve2 = new Eleve();
+//            Eleve eleve3 = new Eleve();
+//            eleve2.setFirstName("TADFj");
+//            eleve2.setLastName("KIKI");
+//            eleve2.setParent(parent);
+//            eleve3.setLastName("AIT AHMID");
+//            eleve3.setFirstName("Tarik");
+//            eleve3.setParent(parent2);
+//            eleveService.addEleve(eleve3);
+//            eleveService.addEleve(eleve2);
+//            eleveService.addEleve(eleve);
+//
+//
+//            Paiement paiement = new Paiement();
+//            paiement.setMontant(23.3);
+//            Paiement paiement2 = new Paiement();
+//            paiement.setMontant(23458.3);
+//            paiementRepository.save(paiement);
+//            paiementRepository.save(paiement2);
+////
+//
+//
+//            Facture facture = new Facture();
+//            facture.setMontant(232);
+//            factureRepository.save(facture);
+//            paiement.setFacture(facture);
+//            paiement2.setFacture(facture);
+//            paiementRepository.save(paiement);
+//            paiementRepository.save(paiement2);
+//
+//            Remise discount = new Remise();
+//            discount.setPercentage(4.2);
+//            discount.setNameDiscount("Lilah");
+//            Remise discount2 = new Remise();
+//            discount2.setNameDiscount("Aid Adha");
+//            discount2.setConditionn("Homme endicap");
+//            discount2.setPercentage(5.2);
+//            remiseRepository.save(discount);
+//            remiseRepository.save(discount2);
+//            serviceRepository.save(natation);
+//
+//            EtatService etatService = new EtatService();
+//            EtatService etatService2 = new EtatService();
+//            etatService.setService(natation);
+//            etatService.setEleve(eleve2);
+//            etatService.setPayer(false);
+//
+//            etatService2.setService(natation);
+//            etatService2.setEleve(eleve2);
+//            etatServiceRepository.save(etatService);
+//            etatServiceRepository.save(etatService2);
 
 
 

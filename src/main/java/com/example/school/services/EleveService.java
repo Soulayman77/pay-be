@@ -28,7 +28,7 @@ public class EleveService {
         LocalDate date = eleve.getDateNaissance();
 //
         List<com.example.school.Entities.Service> obligatoryServices = serviceRepository.findAll().stream()
-                .filter(service -> ServiceType.OBLICATORY.equals(service.getType()))
+                .filter(service -> ServiceType.OBLIGATORY.equals(service.getType()))
                 .collect(Collectors.toList());
         obligatoryServices.forEach(p->{
             EtatService etatService = new EtatService();
@@ -70,6 +70,13 @@ public class EleveService {
 
     public void deleteStudentById(Long id) {
         eleveRepository.deleteById(id);
+    }
+
+    public void addServiceToEleve(Eleve eleve, com.example.school.Entities.Service service) {
+        EtatService etatService = new EtatService();
+        etatService.setService(service);
+        etatService.setEleve(eleve);
+        etatServiceRepository.save(etatService);
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.school.Controllers;
 
 import com.example.school.Entities.Service;
 import com.example.school.Repositories.ServiceRepository;
+import com.example.school.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ServiceController {
     @Autowired
     private ServiceRepository serviceRepository;
+    @Autowired
+    private ServiceService serviceService;
     @GetMapping("/all")
     public List<Service> getServices(){
         return serviceRepository.findAll();
@@ -28,7 +31,7 @@ public class ServiceController {
 
     @PostMapping("/add")
     public Service addService(@RequestBody Service service){
-        return serviceRepository.save(service);
+        return serviceService.addService(service);
     }
 
     @PutMapping("/serviceId")
