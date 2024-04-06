@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.web.cors.CorsConfiguration;
 
 
 @Configuration
@@ -44,11 +45,15 @@ public class SecurityConfiguration {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         //To configure
         http
+                .cors(httpSecurityCorsConfigurer ->
+                httpSecurityCorsConfigurer.configurationSource(request ->
+                                new CorsConfiguration().applyPermitDefaultValues()
+                        ))
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/users").permitAll().anyRequest().authenticated())
 
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/users").permitAll().requestMatchers(HttpMethod.OPTIONS).permitAll().requestMatchers(HttpMethod.POST, "/users").permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session
-                        .maximumSessions(1)
+                        .maximumSessions(3)
                         .sessionRegistry(sessionRegistry())
                         .maxSessionsPreventsLogin(true))
                 .userDetailsService(userDetailsService)
