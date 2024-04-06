@@ -45,7 +45,7 @@ public class SecurityConfiguration {
         //To configure
         http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/users").permitAll().anyRequest().authenticated())
 
                 .sessionManagement(session -> session
                         .maximumSessions(1)
