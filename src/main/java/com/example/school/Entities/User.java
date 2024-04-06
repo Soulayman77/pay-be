@@ -40,9 +40,7 @@ public class User {
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
-    public void setPassword(String password) {
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
-    }
+
 
     // Get full name
     @JsonIgnore

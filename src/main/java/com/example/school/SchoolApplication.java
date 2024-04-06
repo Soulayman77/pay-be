@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 public class SchoolApplication {
 
 
+
     public static void main(String[] args) {
 
         SpringApplication.run(SchoolApplication.class, args);

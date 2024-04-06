@@ -1,17 +1,23 @@
 package com.example.school.Security;
 
 import com.example.school.services.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
@@ -22,7 +28,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
-
+    @Autowired // Autowired member variable
     private final MyUserDetailsService userDetailsService;
 
     public SecurityConfiguration(MyUserDetailsService userDetailsService) {
@@ -39,10 +45,8 @@ public class SecurityConfiguration {
         //To configure
         http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
+
                 .sessionManagement(session -> session
                         .maximumSessions(1)
                         .sessionRegistry(sessionRegistry())
@@ -72,6 +76,7 @@ public class SecurityConfiguration {
                     if (exception instanceof BadCredentialsException) {
                         // set status code to 400 (Bad Request) when the username or password is incorrect
                         // by default, the response status code is 200 (OK)
+
                         response.setStatus(HttpStatus.BAD_REQUEST.value());
                         response.getWriter().write("{\"message\": \"Incorrect username or password\"}");
                     } else {
@@ -94,6 +99,27 @@ public class SecurityConfiguration {
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Bean
+    public DaoAuthenticationProvider authProvider(PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        /*authProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());*/
+        return authProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .authenticationProvider(authProvider(passwordEncoder))
+                .build();
+    }
+
+    /*@Bean
+    public CustomPasswordMatcher customPasswordMatcher(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+        return new CustomPasswordMatcher(userDetailsService, passwordEncoder);
+    }*/
+
 
 
 }

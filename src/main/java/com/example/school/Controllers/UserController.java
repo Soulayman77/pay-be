@@ -52,7 +52,6 @@ public class UserController {
     User getUser(@PathVariable("id") final Long id) {
         return userService.getUser(id);
     }
-
     @RequestMapping(value="/users", method = RequestMethod.GET)
     ResponseEntity<?> getUsers(@RequestParam(value = "email", required = false) String email,
                                Pageable pageable, @RequestParam(value = "search", required = false) String search,

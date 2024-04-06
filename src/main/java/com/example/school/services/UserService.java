@@ -1,20 +1,25 @@
 package com.example.school.services;
 
-import com.example.school.Dto.EditPasswordDto;
+import com.example.school.Dto.*;
 import com.example.school.Entities.User;
 import com.example.school.Entities.UserRole;
 import com.example.school.Repositories.UserRepository;
 import lombok.Data;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import com.example.school.Entities.MyUserDetails;
 import java.util.function.Supplier;
-import com.example.school.Dto.EditUserDto;
-import com.example.school.Dto.CreateUserDto;
-import com.example.school.Dto.UserDtoMapper;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -28,8 +33,10 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    private UserDtoMapper userDtoMapper;
+    @Autowired
+    private UserDtoMapperImpl userDtoMapper;
+   /* @Autowired
+    PasswordEncoder passwordEncoder;*/
 
     public User getUser(final Long id) {
         return userRepository.findById(id).orElseThrow(NOT_FOUND_HANDLER);
@@ -62,10 +69,14 @@ public class UserService {
     public User addUser(CreateUserDto createUserDto){
         // Check if email already exists (to avoid an error from the unique constraint)
         User check = userRepository.findByEmail(createUserDto.getEmail()).orElse(null);
+
         if(check != null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
         }
         User user = userDtoMapper.createUserDtoToUser(createUserDto);
+        /*String pw = passwordEncoder.encode(userDtoMapper.createUserDtoToUser(createUserDto).getPassword());
+        System.out.println(pw);*/
+        user.setPassword(userDtoMapper.createUserDtoToUser(createUserDto).getPassword());
         user.setActive(true);
         return userRepository.save(user);
     }
@@ -87,3 +98,4 @@ public class UserService {
         userRepository.delete(userRepository.findById(id).orElseThrow(NOT_FOUND_HANDLER));
     }
 }
+

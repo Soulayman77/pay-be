@@ -26,7 +26,7 @@ public class CreateUserDto {
     private String lastName;
 
     @NotBlank(message = "The email is required")
-    @Pattern(regexp = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@um5.ac.ma$", message = "The email is invalid")
+    @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", message = "The email is invalid")
     private String email;
 
     @NotBlank(message = "The password is required")
